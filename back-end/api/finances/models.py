@@ -26,11 +26,12 @@ class Transaction(models.Model):
     updated = models.DateTimeField(auto_now = True)
     notes = models.TextField(blank=True, null = True)
     transaction_type = models.CharField(max_length = 2, choices = TransactionType)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete = models.CASCADE, related_name = 'finances_transactions')
 
     objects = models.Manager()
     income = IncomeManager()
-
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete = models.CASCADE, related_name = 'finances_transactions')
+    expense = ExpenseManager()
+    investment = InvestmentManager()
 
 
     class Meta:
